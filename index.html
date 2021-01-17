@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pokedex - CSS Workshop</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+    <div class="topbartop">
+        <img class="pokImg" src="img/pokemon_logo.svg" alt="pokemon">
+        <form class="search_pokemon">
+            <input id="search" class="textbox" type="text" placeholder="Search pokemon" />
+            <input class="btn_search" type="submit" value="Search" />
+        </form>
+    </div>
+
+    <div id="wrapper">
+        <div>
+            <ul>
+                <li><span class="topbar-btn">TEAMS</span></li>
+                <li><span class="topbar-btn">POKÉDEX</span></li>
+                <li><span class="topbar-btn">COUNTER</span></li>
+                <li><span class="topbar-btn">TWEET</span> </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="container">
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1 class="pokemonName" id="pokemonName"></h1>
+            <div class="image-content">
+                <img class="pokemonImg" id="pokemonImg" src="#" alt="">
+            </div>
+
+            <div class="inner"></div>
+        </div>
+    </div>
+
+    <script src="src/app.js"></script>
+</body>
+
+</html>

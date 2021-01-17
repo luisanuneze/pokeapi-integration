@@ -1,0 +1,371 @@
+html,
+body {
+    height: 100%;
+    margin: 0%;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #000000;
+    background-color: #fff;
+}
+
+.topbartop {
+    height: 50px;
+    width: 100%;
+    background-color: #ff4238;
+    margin-top: 0%;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 12px 12px 12px 12px #000000
+}
+
+.search_pokemon {
+    text-align: right;
+    border-style: none;
+    margin: 0%;
+    align-content: center;
+    padding-top: 5px;
+}
+
+a {
+    color: #2772B0;
+}
+
+.textbox {
+    border-radius: 4px;
+    border: none;
+    font-size: 12px;
+    margin: auto;
+    padding: 4px;
+    outline: none;
+    height: 30px;
+}
+
+.btn_search {
+    background-color: #744444;
+    border: none;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 4px;
+    cursor: pointer;
+    border-radius: 4px;
+    outline: none;
+    height: 30px;
+}
+
+ul {
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    orientation: landscape;
+    border-style: hidden;
+    background-color: #fff;
+}
+
+li {
+    margin: 0.5em;
+    padding: 0.5em;
+    font-size: 16px;
+    list-style-type: none;
+    color: rgb(102, 62, 62);
+    font-weight: bold;
+}
+
+.pokemonName {
+    text-align: center;
+}
+
+.image-content {
+    /* margin-left: auto;
+    margin-right: auto;
+    width: 50%; */
+    text-align: center;
+}
+
+
+/* General wrapper */
+
+.wrapper {
+    width: 0%;
+    max-width: 1200px;
+    margin: 0 auto;
+    float: none;
+    background-color: #fff;
+}
+
+
+/* Containers */
+
+#container {
+    margin-left: 10%;
+    margin-right: 10%;
+    display: grid;
+    grid-column: 1/2;
+    grid-row: 1/3;
+    grid-template-columns: repeat(5, 250px);
+    justify-content: center;
+}
+
+.poke__container {
+    box-shadow: 0px 12px 32px 4px #00000024;
+    border-radius: 4px;
+    padding: 8px 8px 8px 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 12px 12px 12px 12px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.pokemon__types {
+    width: 50px;
+    padding-top: 4px;
+    /* box-shadow: 2px 2px 2px 2px #0000000d; */
+    border-radius: 4px;
+    padding: 1px 1px 1px 1px;
+    margin-bottom: 6px;
+    text-align: center;
+}
+
+.poke__types__div {
+    display: flex;
+    justify-content: space-around;
+    margin-left: 12px;
+}
+
+.pokemon__ability {
+    box-shadow: 2px 2px 2px 2px #0000000d;
+    padding: 1px 1px 1px 1px;
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+.pokemon__items {
+    box-shadow: 2px 2px 2px 2px #0000000d;
+    padding: 1px 1px 1px 1px;
+}
+
+.pokemon__category {
+    text-align: left;
+    margin-left: 10%;
+}
+
+
+/* .inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    justify-items: center;
+} */
+
+.weight {
+    text-transform: lowercase;
+}
+
+.height {
+    text-transform: lowercase;
+}
+
+.poke__height__label {
+    font-size: 12px;
+}
+
+.poke__weight__label {
+    font-size: 12px;
+}
+
+.poke__moves__label {
+    font-size: 12px;
+}
+
+.pokemon__grass {
+    background-color: #306830;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.pokemon__poison {
+    background-color: #3f243f;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.pokemon__fire {
+    background-color: #632424;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.pokemon__water {
+    background-color: #18184b;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.pokemon__flying {
+    background-color: #407586;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.pokemon__bug {
+    background-color: #334233;
+    color: #fff;
+    font-weight: bolder;
+}
+
+
+/* Images style  */
+
+img {
+    max-width: 200px;
+    align-content: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.pokImg {
+    padding: 0%;
+    height: 44px;
+}
+
+.pokemonImg {
+    height: 200px;
+    width: 200px;
+}
+
+
+/* Modal style */
+
+.modal {
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #00000080;
+    backdrop-filter: blur(5px);
+    display: none;
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    display: grid;
+    align-items: center;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 4px solid #888;
+    width: 80%;
+    text-transform: capitalize;
+    /* flex-flow: column; */
+    grid-template-columns: 3fr;
+    justify-content: center;
+}
+
+
+/* The Close Button */
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: end;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.topbar-btn {
+    color: #000000;
+    font-weight: bold;
+}
+
+.topbar-btn:hover,
+.topbar-btn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.h2Ab {
+    text-align: left;
+    font-weight: bold;
+    margin-left: 10%;
+}
+
+
+/* .h2Cat {
+    text-align: left;
+    font-weight: bold;
+    margin-left: 10%;
+} */
+
+
+/* Media queries */
+
+
+/* For smaller screens */
+
+@media only screen and (min-width: 200px) {
+    #container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* Mobile Landscape Screen Sizes */
+
+@media only screen and (min-width: 480px) {
+    #container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+/* Tablet size */
+
+@media only screen and (min-width: 600px) {
+    #container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+/* Desktop screen Sizes */
+
+@media only screen and (min-width: 768px) {
+    #container {
+        grid-template-columns: repeat(5, 250px);
+    }
+}
+
+
+/* High res desktops and laptops */
+
+@media only screen and (min-width: 1281px) {
+    #container {
+        grid-template-columns: repeat(5, 250px);
+    }
+}
