@@ -1,9 +1,11 @@
 //Declaring global variables
-const urlPokeapi = "https://pokeapi.co/api/v2/pokemon?limit=10";
+const urlPokeapi = "https://pokeapi.co/api/v2/pokemon?limit=100";
 const allPokemonContainer = document.querySelector("#container");
 
 // Get the modal
 var modal = document.getElementById("myModal");
+
+var pokemonList = [];
 
 // Get the button that opens the modal
 var closeButton = document.querySelector(".close");
@@ -41,7 +43,8 @@ const pokeStyleTypesObj = {
     flying: 'pokemon__flying',
     bug: 'pokemon__bug',
     ghost: 'pokemon__ghost',
-    dragon: 'pokemon__dragon'
+    dragon: 'pokemon__dragon',
+    fairy: 'pokemon__fairy'
 }
 
 var pokemonData = document.getElementById("poke__container");
@@ -50,20 +53,21 @@ function individualContainers(pokeData) {
     //Main div
     const pokemonContainer = document.createElement("div");
     pokemonContainer.classList.add('poke__container');
+    pokemonContainer.dataset.pokemonNameData = pokeData.name.toLowerCase();
 
     //Pokemon name
     pokemonContainer.innerText = `${pokeData.name}`;
     allPokemonContainer.appendChild(pokemonContainer);
 
     //Opens the pop up
-    pokemonContainer.style.cursor = 'pointer';
+    pokemonContainer.style.cursor = 'pointer'; // css
     pokemonContainer.onclick = function() {
         modal.style.display = "block";
         //Shows data
         document.getElementById('pokemonName').innerText = pokeData.name;
         document.getElementById('pokemonImg').src = `https://pokeres.bastionbot.org/images/pokemon/${pokeData.id}.png`;
 
-        //types of pokemon
+        //Pokemon types
         const pokeTypesDiv = document.createElement("div")
         pokeTypesDiv.classList.add('poke__types__div')
         const typesArray = pokeData.types.map(({ type }) => (type.name));
@@ -76,30 +80,48 @@ function individualContainers(pokeData) {
             //Gets types
             pokeTypes.classList.add(pokeStyleTypesObj[type]);
             pokeTypesDiv.appendChild(pokeTypes);
-
         });
         document.querySelector('.modal-content .inner').appendChild(pokeTypesDiv)
 
+        //weightHeightDiv
+        const weightHeightDiv = document.createElement("div");
+        weightHeightDiv.classList.add('weightHeightDiv')
+
+        //Height
         const pokeHeightLabel = document.createElement("p");
         pokeHeightLabel.classList.add('poke__height__label')
         pokeHeightLabel.innerText = 'Height';
-        document.querySelector('.modal-content .inner').appendChild(pokeHeightLabel)
 
         const height = document.createElement("p");
         height.classList.add('height')
         height.innerText = `${pokeData.height} ft`;
-        document.querySelector('.modal-content .inner').appendChild(height)
 
+        const heightDiv = document.createElement("div");
+        heightDiv.classList.add('height__div')
+        heightDiv.appendChild(pokeHeightLabel);
+        heightDiv.appendChild(height);
+        heightDiv.classList.add('heightDiv')
+        weightHeightDiv.appendChild(heightDiv);
+
+        //Weight
         const pokeWeightLabel = document.createElement("p");
         pokeWeightLabel.classList.add('poke__weight__label')
         pokeWeightLabel.innerText = 'Weight';
-        document.querySelector('.modal-content .inner').appendChild(pokeWeightLabel)
 
         const weight = document.createElement("p");
         weight.classList.add('weight')
         weight.innerText = `${pokeData.weight} kg`;
-        document.querySelector('.modal-content .inner').appendChild(weight)
 
+        const weightDiv = document.createElement("div");
+        weightDiv.classList.add('weight__div')
+        weightDiv.appendChild(pokeWeightLabel);
+        weightDiv.appendChild(weight);
+        weightDiv.classList.add('weightDiv')
+        weightHeightDiv.appendChild(weightDiv);
+
+        document.querySelector('.modal-content .inner').appendChild(weightHeightDiv)
+
+        //Moves
         const pokeMovesLabel = document.createElement("p");
         pokeMovesLabel.classList.add('poke__moves__label')
         pokeMovesLabel.innerText = 'Moves';
@@ -109,7 +131,6 @@ function individualContainers(pokeData) {
         pokeMoves.classList.add('pokemon__moves')
         pokeMoves.innerText = pokeData.moves.map(({ move }) => (move.name)).join(", ");
         document.querySelector('.modal-content .inner').appendChild(pokeMoves)
-
     }
 
     //Shows all pokemon data
@@ -123,26 +144,24 @@ function individualContainers(pokeData) {
     pokeImg.src = `https://pokeres.bastionbot.org/images/pokemon/${pokeData.id}.png`;
     pokeImg.srcset = `https://pokeres.bastionbot.org/images/pokemon/${pokeData.id}.png`;
     pokeImg.sizes = "(max-width: 600px) 480px";
+    pokeImgContainer.appendChild(pokeImg);
+    pokemonContainer.appendChild(pokeImgContainer);
 
     //Creates div for individual ability
+    const divAb = document.createElement('p');
+    divAb.classList.add('h2Ab');
+    divAb.innerText = 'Abilities';
+
     const pokeAbility = document.createElement("div") //divAbility
     pokeAbility.classList.add('pokemon__category')
     pokeAbility.innerText = pokeData.abilities.map(({ ability }) => (ability.name)).join(", ");
 
-    //Creates div for held_items
-    const pokeItems = document.createElement("div")
-    pokeItems.classList.add('poke__items')
-    pokeItems.innerText = pokeData.held_items.map(({ held_items }) => (held_items.name)).join(", ");
-
-    //Hierarchy
-    pokeImgContainer.appendChild(pokeImg);
-    pokemonContainer.appendChild(pokeImgContainer);
-
-    //types of pokemon
+    //Pokemon types
     const pokeTypesDiv = document.createElement("div")
     pokeTypesDiv.classList.add('poke__types__div')
     const typesArray = pokeData.types.map(({ type }) => (type.name));
     typesArray.forEach(type => {
+
         //Individual box for types
         const pokeTypes = document.createElement("div") //divTypes
         pokeTypes.classList.add('pokemon__types')
@@ -152,26 +171,17 @@ function individualContainers(pokeData) {
         pokeTypesDiv.appendChild(pokeTypes);
     });
 
-
     pokemonContainer.appendChild(pokeTypesDiv);
-    const divAb = document.createElement('p');
-    divAb.classList.add('h2Ab');
-    divAb.innerText = 'Abilities';
     pokemonContainer.appendChild(divAb);
-
-    //pokeItems to container
-    pokemonContainer.appendChild(pokeItems);
-    //pokeAbility to container
     pokemonContainer.appendChild(pokeAbility);
 }
 
-//Fetching json with 10 pokemon, it retrieves an array with all pokemon url
+//Fetching json with pokemon, it retrieves an array with all pokemon url
 async function fetchingAllPokemon() {
-    // const allPromise = fetch(urlPokeapi); //Ticket
 
     // function onSuccess(response) {
     //     if (response.ok) {
-    //         // console.log("success");
+    // console.log(response);
     //         return response.json();
     //     } else {
     //         console.log("Failed");
@@ -185,15 +195,13 @@ async function fetchingAllPokemon() {
     //     }
     // }
 
-    // // allPromise.then(onSuccess).then(onSuccessSuccess);
-    // const response = await fetch(urlPokeapi); //allPromise
+    // const response = await fetch(urlPokeapi);
     // const data = await onSuccess(response);
     // onSuccessSuccess(data);
 
-    fetch(urlPokeapi)
+    await fetch(urlPokeapi)
         .then((response) => {
             if (response.ok) {
-                console.log("success");
                 return response.json();
             } else {
                 console.log("Failed");
@@ -203,15 +211,30 @@ async function fetchingAllPokemon() {
             for (const pokemon of data.results) {
                 const pokeData = await fetchingPokemonData(pokemon);
                 individualContainers(pokeData);
+                pokemonList.push(pokeData)
             }
         });
+
+    const nameForm = document.querySelector('.search-box')
+    nameForm.addEventListener('input', Event => {
+        Event.preventDefault()
+        const term = Event.target.value.toLowerCase()
+        const elements = document.querySelectorAll('.poke__container');
+
+        elements.forEach((element) => {
+
+            element.classList.remove("hide");
+            if (!element.dataset.pokemonNameData.includes(term)) {
+                element.classList.add("hide");
+            }
+        });
+    })
 }
 
 //Fetch to get individual pokemon information
 async function fetchingPokemonData(pokemon) {
     let url = pokemon.url;
     const pokeData = await fetch(url).then((response) => response.json())
-
     return pokeData;
 }
 
